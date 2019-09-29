@@ -51,7 +51,7 @@ public class StaticContent {
         }
     }
 
-    public static boolean canExchangeDays(FullMonth fullMonth, Specializer higherS, Specializer lowerS, FullDay fullDayHigher, FullDay fullDayLower) {
+    public static boolean canExhangeDays(FullMonth fullMonth, Specializer higherS, Specializer lowerS, FullDay fullDayHigher, FullDay fullDayLower) {
         return Rules.hasCurrentDay(fullMonth, higherS, fullDayHigher) &&
                 !Rules.hasCurrentDay(fullMonth, higherS, fullDayLower) &&
                 Rules.hasCurrentDay(fullMonth, lowerS, fullDayLower) &&

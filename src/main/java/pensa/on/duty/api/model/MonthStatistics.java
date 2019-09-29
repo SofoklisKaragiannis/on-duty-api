@@ -38,6 +38,9 @@ public class MonthStatistics implements Cloneable{
     @JsonProperty("specializerDays")
     private Map<String, Integer> specializerDays;
 
+    @JsonProperty("totalDayExperience")
+    private Map<Integer, Integer> totalDayExperience;
+
     @JsonProperty("specializerDaysList")
     private Map<String, Map<DayOfWeek, Integer>> specializerDaysList;
 
@@ -81,6 +84,15 @@ public class MonthStatistics implements Cloneable{
 
     public void setSpecializerDays(Map<String, Integer> specializerDays) {
         this.specializerDays = specializerDays;
+    }
+
+    public Map<Integer, Integer> getTotalDayExperience() {
+        if (totalDayExperience == null) totalDayExperience = new HashMap<>();
+        return totalDayExperience;
+    }
+
+    public void setTotalDayExperience(Map<Integer, Integer> totalDayExperience) {
+        this.totalDayExperience = totalDayExperience;
     }
 
     public Map<String, Map<DayOfWeek, Integer>> getSpecializerDaysList() {

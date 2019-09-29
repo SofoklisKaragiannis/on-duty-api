@@ -31,6 +31,9 @@ public class FullDay implements Cloneable {
     @JsonProperty("dayWeight")
     private Integer dayWeight;
 
+    @JsonProperty("experience")
+    private Integer experience;
+
     public String getFullday() {
         return fullday;
     }
@@ -80,6 +83,14 @@ public class FullDay implements Cloneable {
         this.dayWeight = dayWeight;
     }
 
+    public Integer getExperience() {
+        return experience;
+    }
+
+    public void setExperience(Integer experience) {
+        this.experience = experience;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -94,12 +105,13 @@ public class FullDay implements Cloneable {
                 Objects.equals(specializerNumber, that.specializerNumber) &&
                 Objects.equals(fullday, that.fullday) &&
                 Objects.equals(dayOfMonth, that.dayOfMonth) &&
-                Objects.equals(dayWeight, that.dayWeight);
+                Objects.equals(dayWeight, that.dayWeight) &&
+                Objects.equals(experience, that.experience);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(day, specializerList, specializerNumber, fullday, dayOfMonth, dayWeight);
+        return Objects.hash(day, specializerList, specializerNumber, fullday, dayOfMonth, dayWeight, experience);
     }
 
     public FullDay clone() throws CloneNotSupportedException {
