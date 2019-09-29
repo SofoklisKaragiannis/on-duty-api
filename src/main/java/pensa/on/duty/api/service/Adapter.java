@@ -110,6 +110,8 @@ public class Adapter {
 
                         StaticContent.setStatisticsMonthSpecializerDaysList(monthStatistics, fullDay, specializer);
 
+                        monthStatistics.getTotalDayExperience().put(fullDay.getDayOfMonth(), fullDay.getSpecializerList().stream().mapToInt(s -> s.getExperience()).sum());
+
                     });
                 });
             }

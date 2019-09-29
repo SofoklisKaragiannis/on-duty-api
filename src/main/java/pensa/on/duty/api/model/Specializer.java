@@ -23,6 +23,9 @@ public class Specializer implements Cloneable{
     @JsonProperty("name")
     private String name;
 
+    @JsonProperty("experience")
+    private Integer experience;
+
     @JsonProperty("availability")
     private Map<LocalDate, Availability> availability;
 
@@ -40,6 +43,14 @@ public class Specializer implements Cloneable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getExperience() {
+        return experience;
+    }
+
+    public void setExperience(Integer experience) {
+        this.experience = experience;
     }
 
     public Map<LocalDate, Availability> getAvailability() {
@@ -62,12 +73,13 @@ public class Specializer implements Cloneable{
         Specializer that = (Specializer) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
+                Objects.equals(experience, that.experience) &&
                 Objects.equals(availability, that.availability);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, availability );
+        return Objects.hash(id, name, experience, availability );
     }
 
     public Specializer clone() throws CloneNotSupportedException {

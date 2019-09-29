@@ -39,16 +39,34 @@ public class StaticContent {
         });
 
         boolean areDutiesEquilisedByDays = true;
-        Integer loopIndex = 0;
-        while (areDutiesEquilisedByDays && loopIndex < 200) {
+        while (areDutiesEquilisedByDays) {
             areDutiesEquilisedByDays = DaysEqualization.equalizeDutiesByDays(fullMonth, adapter);
-            loopIndex++;
         }
 
         boolean areDutiesEquilisedByWeight = true;
         while (areDutiesEquilisedByWeight) {
             areDutiesEquilisedByWeight = WeightEqualization.equalizeDutiesByWeight(fullMonth, adapter);
         }
+
+        boolean areDaysEquilisedByExperience = true;
+        Integer equalisationLoops = 200;
+        Integer index = 0;
+        while (areDaysEquilisedByExperience && index <= equalisationLoops) {
+            areDaysEquilisedByExperience = DaysExperienceEqualisation.equalizeDaysByExperince(fullMonth, adapter);
+            index++;
+        }
+        System.out.println("index :" + index);
+    }
+
+    public static boolean canExhangeDaysEperience(FullMonth fullMonth, Specializer higherS, Specializer lowerS, FullDay fullDayHigher, FullDay fullDayLower) {
+        return Rules.hasCurrentDay(fullMonth, higherS, fullDayHigher) &&
+                !Rules.hasCurrentDay(fullMonth, higherS, fullDayLower) &&
+                Rules.hasCurrentDay(fullMonth, lowerS, fullDayLower) &&
+                !Rules.hasCurrentDay(fullMonth, lowerS, fullDayHigher) &&
+                !Rules.hasConsecutiveDays(fullMonth, higherS, fullDayLower) &&
+                !Rules.hasConsecutiveDays(fullMonth, lowerS, fullDayHigher) &&
+                Rules.isAvailable(fullMonth, higherS, fullDayLower) &&
+                Rules.isAvailable(fullMonth, lowerS, fullDayHigher) ;
     }
 
     public static boolean canExhangeDays(FullMonth fullMonth, Specializer higherS, Specializer lowerS, FullDay fullDayHigher, FullDay fullDayLower) {

@@ -7,17 +7,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
-import pensa.on.duty.api.framework.StaticContent;
 import pensa.on.duty.api.framework.V1;
 import pensa.on.duty.api.model.MonthStatistics;
-import pensa.on.duty.api.model.Specializer;
 import pensa.on.duty.api.service.Adapter;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
