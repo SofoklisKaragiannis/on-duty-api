@@ -39,7 +39,7 @@ public class GetDuties {
         DeferredResult<ResponseEntity<ResponseMonth>> deferredResult = new DeferredResult<>();
         // receive parameter values
         Map<String, String> requestParameters = new HashMap<>(parameters);
-        String month = "01/" + requestParameters.get("month");
+        String month = "01/" + requestParameters.get("month") + "/" + requestParameters.get("year");
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.parse(month, formatter);
@@ -48,7 +48,7 @@ public class GetDuties {
         List<Specializer> specializerList = adapter.getSpecializerList(localDate, daysInMonth);
 
         FullMonth fullMonth = StaticContent.getEmptySelectedFullMonth(adapter.getFullMonthList(),localDate);
-        StaticContent.polulateDuties(fullMonth, localDate, specializerList, adapter);
+        StaticContent.populateDuties(fullMonth, localDate, specializerList, adapter);
 
         adapter.addFullMonth(fullMonth);
 

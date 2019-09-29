@@ -49,7 +49,7 @@ public class WeightEqualization {
 
         for (FullDay fullDayHigher : matchingDatesHigher) {
             for (FullDay fullDayLower : matchingDatesLower) {
-                if (StaticContent.canExhangeDays(fullMonth, higherS, lowerS, fullDayHigher, fullDayLower)) {
+                if (StaticContent.canExchangeDays(fullMonth, higherS, lowerS, fullDayHigher, fullDayLower)) {
 //                    System.out.println("Higher " + higherS.getName() + " : " + fullDayHigher.getDay().getDayOfMonth());
 //                    System.out.println("Lower " + lowerS.getName() + " : " + fullDayLower.getDay().getDayOfMonth());
 

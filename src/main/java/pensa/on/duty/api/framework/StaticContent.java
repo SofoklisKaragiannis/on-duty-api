@@ -33,15 +33,15 @@ public class StaticContent {
         return deferredResult;
     }
 
-    public static void polulateDuties(FullMonth fullMonth, LocalDate period, List<Specializer> specializerList, Adapter adapter) {
+    public static void populateDuties(FullMonth fullMonth, LocalDate period, List<Specializer> specializerList, Adapter adapter) {
         fullMonth.getFullDayList().forEach(fullDay -> {
             StaticContent.setSpecializer(fullMonth, fullDay,  specializerList, period);
         });
 
-        boolean areDutiesEquilisedByDays = true;
+        boolean areDutiesEqualisedByDays = true;
         Integer loopIndex = 0;
-        while (areDutiesEquilisedByDays && loopIndex < 200) {
-            areDutiesEquilisedByDays = DaysEqualization.equalizeDutiesByDays(fullMonth, adapter);
+        while (areDutiesEqualisedByDays && loopIndex < 200) {
+            areDutiesEqualisedByDays = DaysEqualization.equalizeDutiesByDays(fullMonth, adapter);
             loopIndex++;
         }
 
@@ -51,7 +51,7 @@ public class StaticContent {
         }
     }
 
-    public static boolean canExhangeDays(FullMonth fullMonth, Specializer higherS, Specializer lowerS, FullDay fullDayHigher, FullDay fullDayLower) {
+    public static boolean canExchangeDays(FullMonth fullMonth, Specializer higherS, Specializer lowerS, FullDay fullDayHigher, FullDay fullDayLower) {
         return Rules.hasCurrentDay(fullMonth, higherS, fullDayHigher) &&
                 !Rules.hasCurrentDay(fullMonth, higherS, fullDayLower) &&
                 Rules.hasCurrentDay(fullMonth, lowerS, fullDayLower) &&
