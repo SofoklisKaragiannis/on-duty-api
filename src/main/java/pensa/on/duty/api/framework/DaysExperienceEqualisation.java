@@ -58,17 +58,17 @@ public class DaysExperienceEqualisation {
 
 //                        Specializer higherS = specializersHigher.stream().filter(s -> s.getExperience() == specializerMaxExperience).collect(Collectors.toList()).get(0);
 //                        Specializer lowerS = specializersLower.stream().filter(s -> s.getExperience() == specializerMinExperience).collect(Collectors.toList()).get(0);
-                        if (StaticContent.canExhangeDaysEperience(fullMonth, higherS, lowerS, fullDayHigher, fullDayLower)) {
-                            System.out.println("Higher " + higherS.getName() + " : " + fullDayHigher.getDay().getDayOfMonth());
-                            System.out.println("Lower " + lowerS.getName() + " : " + fullDayLower.getDay().getDayOfMonth());
-
-                            StaticContent.addRemoveSpecializerToFullDay(fullMonth, higherS, lowerS, fullDayHigher);
-
-                            StaticContent.addRemoveSpecializerToFullDay(fullMonth, lowerS, higherS, fullDayLower);
-
-                            areEqualized = true;
-                            break;
-                        }
+//                        if (StaticContent.canExhangeDaysEperience(fullMonth, higherS, lowerS, fullDayHigher, fullDayLower)) {
+//                            System.out.println("Higher " + higherS.getName() + " : " + fullDayHigher.getDay().getDayOfMonth());
+//                            System.out.println("Lower " + lowerS.getName() + " : " + fullDayLower.getDay().getDayOfMonth());
+//
+//                            StaticContent.addRemoveSpecializerToFullDay(fullMonth, higherS, lowerS, fullDayHigher);
+//
+//                            StaticContent.addRemoveSpecializerToFullDay(fullMonth, lowerS, higherS, fullDayLower);
+//
+//                            areEqualized = true;
+//                            break;
+//                        }
                     }
                 }
                 if (areEqualized) {

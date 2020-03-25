@@ -49,17 +49,17 @@ public class WeightEqualization {
 
         for (FullDay fullDayHigher : matchingDatesHigher) {
             for (FullDay fullDayLower : matchingDatesLower) {
-                if (StaticContent.canExchangeDays(fullMonth, higherS, lowerS, fullDayHigher, fullDayLower)) {
-//                    System.out.println("Higher " + higherS.getName() + " : " + fullDayHigher.getDay().getDayOfMonth());
-//                    System.out.println("Lower " + lowerS.getName() + " : " + fullDayLower.getDay().getDayOfMonth());
-
-                    StaticContent.addRemoveSpecializerToFullDay(fullMonth, higherS, lowerS, fullDayHigher);
-
-                    StaticContent.addRemoveSpecializerToFullDay(fullMonth, lowerS, higherS, fullDayLower);
-
-                    areEqualized = true;
-                    break;
-                }
+//                if (StaticContent.canExchangeDays(fullMonth, higherS, lowerS, fullDayHigher, fullDayLower)) {
+////                    System.out.println("Higher " + higherS.getName() + " : " + fullDayHigher.getDay().getDayOfMonth());
+////                    System.out.println("Lower " + lowerS.getName() + " : " + fullDayLower.getDay().getDayOfMonth());
+//
+//                    StaticContent.addRemoveSpecializerToFullDay(fullMonth, higherS, lowerS, fullDayHigher);
+//
+//                    StaticContent.addRemoveSpecializerToFullDay(fullMonth, lowerS, higherS, fullDayLower);
+//
+//                    areEqualized = true;
+//                    break;
+//                }
             }
         }
         return areEqualized;
