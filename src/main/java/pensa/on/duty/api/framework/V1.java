@@ -16,9 +16,6 @@ public class V1 {
     private static final String URI_SET_MONTH = "setMonth";
     public static final String URI_SET_MONTH_ABSOLUTE = URI_BASE + URI_SET_MONTH;
 
-    private static final String URI_INITIALIZE_MONTH = "initializeMonth";
-    public static final String URI_SET_INITIALIZE_ABSOLUTE = URI_BASE + URI_INITIALIZE_MONTH;
-
     private static final String URI_ADD_SPECIALIZER = "addSpecializer";
     public static final String URI_ADD_SPECIALIZER_ABSOLUTE = URI_BASE + URI_ADD_SPECIALIZER;
 

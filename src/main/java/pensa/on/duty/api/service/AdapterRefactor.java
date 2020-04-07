@@ -1,9 +1,12 @@
 package pensa.on.duty.api.service;
 
 import org.springframework.stereotype.Service;
+import pensa.on.duty.api.framework.AvailabilityList;
+import pensa.on.duty.api.framework.SpecializersList;
 import pensa.on.duty.api.newModel.Availability;
 import pensa.on.duty.api.newModel.FullDay;
 import pensa.on.duty.api.newModel.FullMonth;
+import pensa.on.duty.api.newModel.Specializer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +18,9 @@ public class AdapterRefactor {
 
     private List<FullDay> fullDayList;
 
-    private List<Availability> availabilityList;
+    private AvailabilityList availabilityList;
+
+    private SpecializersList specializerList;
 
     public List<FullMonth> getFullMonthList() {
         if (this.fullMonthList == null) this.fullMonthList = new ArrayList<>();
@@ -43,16 +48,25 @@ public class AdapterRefactor {
         getFullDayList().add(fullDay);
     }
 
-    public List<Availability> getAvailabilityList() {
-        if (this.availabilityList == null) this.availabilityList = new ArrayList<>();
+    public AvailabilityList getAvailabilityList() {
+        if (this.availabilityList == null) this.availabilityList = new AvailabilityList();
         return availabilityList;
     }
 
-    public void setAvailabilityList(List<Availability> availabilityList) {
+    public void setAvailabilityList(AvailabilityList availabilityList) {
         this.availabilityList = availabilityList;
     }
 
     public void addAvailability(Availability availability) {
-        getAvailabilityList().add(availability);
+        getAvailabilityList().getAvailabilityList().add(availability);
+    }
+
+    public SpecializersList getSpecializerList() {
+        if (this.specializerList == null) this.specializerList = new SpecializersList();
+        return specializerList;
+    }
+
+    public void setSpecializerList(SpecializersList specializerList) {
+        this.specializerList = specializerList;
     }
 }

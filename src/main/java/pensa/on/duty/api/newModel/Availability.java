@@ -20,7 +20,7 @@ public class Availability implements Cloneable {
     private LocalDate dutyPeriod;
 
     @JsonProperty("nonAvailable")
-    private Map<Integer, List<Integer>> nonAvailable;
+    private Map<LocalDate, List<Integer>> nonAvailable;
 
     public String getMonthName() {
         return monthName;
@@ -46,18 +46,18 @@ public class Availability implements Cloneable {
         this.dutyPeriod = dutyPeriod;
     }
 
-    public Map<Integer, List<Integer>> getNonAvailable() {
+    public Map<LocalDate, List<Integer>> getNonAvailable() {
         if (nonAvailable == null) {
-            nonAvailable = new HashMap<Integer, List<Integer>>();
+            nonAvailable = new HashMap<LocalDate, List<Integer>>();
         }
         return nonAvailable;
     }
 
-    public void setNonAvailable(Map<Integer, List<Integer>> nonAvailable) {
+    public void setNonAvailable(Map<LocalDate, List<Integer>> nonAvailable) {
         this.nonAvailable = nonAvailable;
     }
 
-    public void addNonAvailable(Integer dayNo, Integer id) {
+    public void addNonAvailable(LocalDate dayNo, Integer id) {
         List<Integer> ids = getNonAvailable().get(dayNo);
         if (ids == null) {
             ids = new ArrayList<>();
