@@ -10,12 +10,10 @@ import org.springframework.web.context.request.async.DeferredResult;
 import pensa.on.duty.api.framework.V2;
 import pensa.on.duty.api.model.ResponseStatusMessage;
 import pensa.on.duty.api.newModel.AvailabilityRequest;
-import pensa.on.duty.api.newModel.Specializer;
 import pensa.on.duty.api.service.AdapterRefactor;
 import pensa.on.duty.api.validators.DateValidatorUsingDateTimeFormatter;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -31,7 +29,7 @@ public class AddAvailability {
     AdapterRefactor adapter;
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiOperation(value = "Operation to add or update specializer")
+    @ApiOperation(value = "Operation to add availability")
     public DeferredResult<ResponseEntity<ResponseStatusMessage>> addAvailability(@RequestBody AvailabilityRequest availabilityRequest,
                                                                                    HttpServletRequest request) {
         DeferredResult<ResponseEntity<ResponseStatusMessage>> deferredResult = new DeferredResult<>();
@@ -40,10 +38,7 @@ public class AddAvailability {
         responseStatusMessage.setMessage("Invalid request");
         responseStatusMessage.setStatus(HttpStatus.BAD_REQUEST.name());
 
-
-
         if (isValidAvailabilityRequest(availabilityRequest)) {
-            String dateInString = "Mon, 05 May 1980";
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
             List<Integer> nonAvailableSpecializers = adapter.getAvailabilityList().getNonAvailableDay(LocalDate.parse(availabilityRequest.getExcludeDay(), formatter));
             if (!nonAvailableSpecializers.contains(availabilityRequest.getSpecializerId())) {
@@ -63,7 +58,7 @@ public class AddAvailability {
     private boolean isValidAvailabilityRequest(AvailabilityRequest availabilityRequest) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateValidatorUsingDateTimeFormatter validator = new DateValidatorUsingDateTimeFormatter(formatter);
-        if (Optional.ofNullable(availabilityRequest.getSpecializerId()).orElse(0) > 0 &&
+        if (Optional.ofNullable(availabilityRequest.getSpecializerId()).orElse(-1) >= 0 &&
             adapter.getSpecializerList().containsId(availabilityRequest.getSpecializerId()) &&
                     validator.isValid(availabilityRequest.getExcludeDay())) {
             return true;
