@@ -11,4 +11,7 @@ public class V2 {
 
     private static final String URI_ADD_AVAILABILITY = "addAvailability";
     public static final String URI_SET_ADD_AVAILABILITY = URI_BASE + URI_ADD_AVAILABILITY;
+
+    private static final String URI_GET_SPECIALIZERS = "getSpecializers";
+    public static final String URI_SET_GET_SPECIALIZERS = URI_BASE + URI_GET_SPECIALIZERS;
 }

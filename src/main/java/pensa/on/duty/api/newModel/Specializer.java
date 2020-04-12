@@ -26,6 +26,9 @@ public class Specializer implements Cloneable{
     @JsonProperty("grade")
     private Integer grade;
 
+    @JsonProperty("active")
+    private Boolean active;
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -58,6 +61,14 @@ public class Specializer implements Cloneable{
         this.grade = grade;
     }
 
+    public Boolean isActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -70,12 +81,13 @@ public class Specializer implements Cloneable{
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(experience, that.experience) &&
-                Objects.equals(grade, that.grade);
+                Objects.equals(grade, that.grade) &&
+                Objects.equals(active, that.active);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, experience, grade);
+        return Objects.hash(id, name, experience, grade, active);
     }
 
     public Specializer clone() throws CloneNotSupportedException {

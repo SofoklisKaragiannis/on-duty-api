@@ -1,6 +1,7 @@
 package pensa.on.duty.api.newController;
 
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,10 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
 import pensa.on.duty.api.framework.V2;
 import pensa.on.duty.api.model.ResponseStatusMessage;
-import pensa.on.duty.api.newModel.RequestMonth;
 import pensa.on.duty.api.newModel.Specializer;
 import pensa.on.duty.api.service.AdapterRefactor;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
@@ -28,7 +27,7 @@ public class HandleSpecializer {
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Operation to add or update specializer")
     public DeferredResult<ResponseEntity<ResponseStatusMessage>> handleSpecializer(@RequestBody Specializer requestSpecializer,
-                                                                           HttpServletRequest request) {
+                                                                                   HttpServletRequest request) {
         DeferredResult<ResponseEntity<ResponseStatusMessage>> deferredResult = new DeferredResult<>();
 
         ResponseStatusMessage responseStatusMessage = new ResponseStatusMessage();
@@ -43,12 +42,18 @@ public class HandleSpecializer {
                 responseStatusMessage.setStatus(HttpStatus.OK.name());
             }
         } else if (isRequestSpecializerValidForUpdate(requestSpecializer)) {
-            Specializer specializer = adapter.getSpecializerList().getSpecializerById(requestSpecializer.getId());
-            specializer.setName(StringUtils.isNotEmpty(requestSpecializer.getName())?requestSpecializer.getName(): specializer.getName());
-            specializer.setExperience(Optional.ofNullable(requestSpecializer.getExperience()).orElse(0) > 0 ? requestSpecializer.getExperience():specializer.getExperience());
-            specializer.setGrade(Optional.ofNullable(requestSpecializer.getGrade()).orElse(0) > 0? requestSpecializer.getGrade():specializer.getGrade());
-            responseStatusMessage.setMessage("Specializer Updated!");
-            responseStatusMessage.setStatus(HttpStatus.OK.name());
+            Specializer specializer;
+            if ((specializer = adapter.getSpecializerList().getSpecializerById(requestSpecializer.getId())) != null) {
+                specializer.setName(StringUtils.isNotEmpty(requestSpecializer.getName()) ? requestSpecializer.getName() : specializer.getName());
+                specializer.setExperience(Optional.ofNullable(requestSpecializer.getExperience()).orElse(-1) > 0 ? requestSpecializer.getExperience() : specializer.getExperience());
+                specializer.setGrade(Optional.ofNullable(requestSpecializer.getGrade()).orElse(-1) > 0 ? requestSpecializer.getGrade() : specializer.getGrade());
+                specializer.setActive(requestSpecializer.isActive() != null ? requestSpecializer.isActive() : specializer.isActive());
+                responseStatusMessage.setMessage("Specializer Updated!");
+                responseStatusMessage.setStatus(HttpStatus.OK.name());
+            } else {
+                responseStatusMessage.setMessage("Specializer does not exist!");
+                responseStatusMessage.setStatus(HttpStatus.GONE.name());
+            }
         }
         deferredResult.setResult(new ResponseEntity<>(responseStatusMessage, HttpStatus.valueOf(responseStatusMessage.getStatus())));
         return deferredResult;
@@ -64,10 +69,11 @@ public class HandleSpecializer {
     }
 
     private boolean isRequestSpecializerValidForUpdate(Specializer requestSpecializer) {
-        if (Optional.ofNullable(requestSpecializer.getId()).orElse(0) > 0 &&
+        if (Optional.ofNullable(requestSpecializer.getId()).orElse(-1) > 0 &&
                 (StringUtils.isNotEmpty(requestSpecializer.getName()) ||
-                        Optional.ofNullable(requestSpecializer.getExperience()).orElse(0) > 0 ||
-                        Optional.ofNullable(requestSpecializer.getGrade()).orElse(0) > 0)
+                        Optional.ofNullable(requestSpecializer.getExperience()).orElse(-1) > 0 ||
+                        Optional.ofNullable(requestSpecializer.getGrade()).orElse(-1) > 0 ||
+                        requestSpecializer.isActive() != null)
         ) {
             return true;
         }
@@ -75,7 +81,7 @@ public class HandleSpecializer {
     }
 
     private Boolean isNewSpecializer(Specializer requestSpecializer, AdapterRefactor adapter) {
-        if (Optional.ofNullable(requestSpecializer.getId()).orElse(0) > 0 &&
+        if (Optional.ofNullable(requestSpecializer.getId()).orElse(-1) > 0 &&
                 adapter.getSpecializerList().containsId(requestSpecializer.getId())) {
             return false;
         }
